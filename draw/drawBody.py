@@ -1,5 +1,5 @@
 from PIL import Image
-from colors import colorsDict
+from colors import colorsDict, backgroundLookup
 from traitEncodings import TRAIT_ENCODINGS
 from draw.drawShirt import drawShirt
 from draw.drawCollaredShirt import drawCollaredShirt
@@ -9,48 +9,152 @@ from draw.drawScarf import drawScarf
 from draw.drawBowtie import drawBowtie
 from draw.drawNecklace import drawNecklace
 
-def drawBody(im, trait, typeEncoding):
+def drawBody(im, trait, typeEncoding, backgroundColor):
     imNew = Image.new('RGBA', (24, 24), (0, 0, 0, 0))
 
-    decodedType = TRAIT_ENCODINGS["body"][trait]
-    if decodedType == "SolanaHoodie":
+    decodedType = TRAIT_ENCODINGS["type"][typeEncoding]
+    colorBlack = (0, 0, 0)
+    if decodedType == "Normal":
+        primaryColor = "typeNormal"
+        colorShade = "typeNormalShade"
+    elif decodedType == "Snowy":
+        primaryColor = "typeSnowy"
+        colorShade = "typeSnowyShade"
+    elif decodedType == "Light":
+        primaryColor = "typeLight"
+        colorShade = "typeLightShade"
+    elif decodedType == "Dark":
+        primaryColor = "typeDark"
+        colorShade = "typeDarkShade"
+    elif decodedType == "Brown":
+        primaryColor = "typeBrown"
+        colorShade = "typeBrownShade"
+    elif decodedType == "DarkBrown":
+        primaryColor = "typeDarkBrown"
+        colorShade = "typeDarkBrownShade"
+    elif decodedType == "Black":
+        primaryColor = "typeBlack"
+        colorShade = "typeBlackShade"
+    elif decodedType == "Skeleton":
+        primaryColor = "typeSkeleton"
+        colorShade = "typeSkeletonShade"
+    elif decodedType == "Alien":
+        primaryColor = "typeAlien"
+        colorShade = "typeAlienShade"
+    elif decodedType == "Zombie":
+        primaryColor = "typeZombie"
+        colorShade = "typeZombieShade"
+    elif decodedType == "Devil":
+        primaryColor = "typeDevil"
+        colorShade = "typeDevilShade"
+    elif decodedType == "Ghost":
+        primaryColor = "typeGhost"
+        colorShade = "typeGhostShade"
+        colorBlack = (0, 0, 0, 128)
+
+    decodedBody = TRAIT_ENCODINGS["body"][trait]
+    if decodedBody == "SolanaHoodie":
         drawHoodie(im, "dark")
-        imNew.putpixel((7, 21), colorsDict["solanaBand"][0])
-        imNew.putpixel((8, 21), colorsDict["solanaBand"][0])
-        imNew.putpixel((7, 22), colorsDict["solanaBand"][int(len(colorsDict["solanaBand"])/2)])
-        imNew.putpixel((8, 22), colorsDict["solanaBand"][int(len(colorsDict["solanaBand"])/2)])
-        imNew.putpixel((7, 23), colorsDict["solanaBand"][-1])
-        imNew.putpixel((8, 23), colorsDict["solanaBand"][-1])
-    elif decodedType == "BlueHoodie":
+        imNew.putpixel((7, 21), backgroundLookup[backgroundColor])
+        imNew.putpixel((8, 21), backgroundLookup[backgroundColor])
+        #imNew.putpixel((7, 22), colorsDict["backgroundGreennt(len(colorsDict["solanaBand"])/2)])
+        #imNew.putpixel((8, 22), colorsDict["backgroundGreennt(len(colorsDict["solanaBand"])/2)])
+        imNew.putpixel((7, 22), backgroundLookup[backgroundColor])
+        imNew.putpixel((8, 22), backgroundLookup[backgroundColor])
+        imNew.putpixel((7, 23), backgroundLookup[backgroundColor])
+        imNew.putpixel((8, 23), backgroundLookup[backgroundColor])
+    elif decodedBody == "BlueHoodie":
         drawHoodie(im, "blueHoodie")
-    elif decodedType == "YellowHoodie":
+    elif decodedBody == "YellowHoodie":
         drawHoodie(im, "yellowHoodie")
-    elif decodedType == "OrangeHoodie":
+    elif decodedBody == "OrangeHoodie":
         drawHoodie(im, "orangeHoodie")
-    elif decodedType == "PurpleHoodie":
+    elif decodedBody == "PurpleHoodie":
         drawHoodie(im, "purpleHoodie")
-    elif decodedType == "BlackHoodie":
+    elif decodedBody == "BlackHoodie":
         drawHoodie(im, "dark")
-    elif decodedType == "GrayHoodie":
+    elif decodedBody == "GrayHoodie":
         drawHoodie(im, "grayHoodie")
-    elif decodedType == "RedCollared":
+    elif decodedBody == "RedCollared":
         drawCollaredShirt(im, "red")
-    elif decodedType == "LightBlueCollared":
+    elif decodedBody == "LightBlueCollared":
         drawCollaredShirt(im, "skyBlue")
-    elif decodedType == "BlueCollared":
+    elif decodedBody == "BlueCollared":
         drawCollaredShirt(im, "blue")
-    elif decodedType == "PinkCollared":
+    elif decodedBody == "PinkCollared":
         drawCollaredShirt(im, "pink")
-    elif decodedType == "YellowCollared":
+    elif decodedBody == "YellowCollared":
         drawCollaredShirt(im, "yellow")
-    elif decodedType == "GreenCollared":
+    elif decodedBody == "GreenCollared":
         drawCollaredShirt(im, "green")
-    elif decodedType == "MuddyPaws":
+    elif decodedBody == "Fat":
+        imNew.putpixel((0, 17), backgroundLookup[backgroundColor])
+        imNew.putpixel((1, 17), backgroundLookup[backgroundColor])
+        imNew.putpixel((2, 17), backgroundLookup[backgroundColor])
+        imNew.putpixel((3, 17), backgroundLookup[backgroundColor])
+        imNew.putpixel((4, 17), colorBlack)
+        imNew.putpixel((5, 17), colorBlack)
+
+        imNew.putpixel((0, 18), backgroundLookup[backgroundColor])
+        imNew.putpixel((1, 18), backgroundLookup[backgroundColor])
+        imNew.putpixel((2, 18), colorBlack)
+        imNew.putpixel((3, 18), colorBlack)
+        imNew.putpixel((4, 18), colorsDict[colorShade])
+        imNew.putpixel((5, 18), colorsDict[colorShade])
+        imNew.putpixel((6, 18), colorsDict[colorShade])
+
+        imNew.putpixel((0, 19), backgroundLookup[backgroundColor])
+        imNew.putpixel((1, 19), backgroundLookup[backgroundColor])
+        imNew.putpixel((1, 19), colorBlack)
+        imNew.putpixel((2, 19), colorsDict[colorShade])
+        imNew.putpixel((3, 19), colorsDict[colorShade])
+        imNew.putpixel((4, 19), colorsDict[primaryColor])
+        imNew.putpixel((5, 19), colorsDict[primaryColor])
+        imNew.putpixel((6, 19), colorsDict[primaryColor])
+        imNew.putpixel((7, 19), colorsDict[primaryColor])
+
+        imNew.putpixel((0, 20), colorBlack)
+        imNew.putpixel((1, 20), colorsDict[colorShade])
+        imNew.putpixel((2, 20), colorsDict[primaryColor])
+        imNew.putpixel((3, 20), colorsDict[primaryColor])
+        imNew.putpixel((4, 20), colorsDict[primaryColor])
+        imNew.putpixel((5, 20), colorsDict[primaryColor])
+        imNew.putpixel((6, 20), colorsDict[primaryColor])
+        imNew.putpixel((7, 20), colorsDict[primaryColor])
+
+        imNew.putpixel((0, 21), colorsDict[colorShade])
+        imNew.putpixel((1, 21), colorsDict[primaryColor])
+        imNew.putpixel((2, 21), colorsDict[primaryColor])
+        imNew.putpixel((3, 21), colorsDict[primaryColor])
+        imNew.putpixel((4, 21), colorsDict[primaryColor])
+        imNew.putpixel((5, 21), colorsDict[primaryColor])
+        imNew.putpixel((6, 21), colorsDict[primaryColor])
+        imNew.putpixel((7, 21), colorsDict[primaryColor])
+
+        imNew.putpixel((0, 22), colorsDict[primaryColor])
+        imNew.putpixel((1, 22), colorsDict[primaryColor])
+        imNew.putpixel((2, 22), colorsDict[primaryColor])
+        imNew.putpixel((3, 22), colorsDict[primaryColor])
+        imNew.putpixel((4, 22), colorsDict[primaryColor])
+        imNew.putpixel((5, 22), colorsDict[primaryColor])
+        imNew.putpixel((6, 22), colorsDict[primaryColor])
+        imNew.putpixel((7, 22), colorsDict[primaryColor])
+
+        imNew.putpixel((0, 23), colorsDict[primaryColor])
+        imNew.putpixel((1, 23), colorsDict[primaryColor])
+        imNew.putpixel((2, 23), colorsDict[primaryColor])
+        imNew.putpixel((3, 23), colorsDict[primaryColor])
+        imNew.putpixel((4, 23), colorsDict[primaryColor])
+        imNew.putpixel((5, 23), colorsDict[primaryColor])
+        imNew.putpixel((6, 23), colorsDict[primaryColor])
+        imNew.putpixel((7, 23), colorsDict[primaryColor])
+
+    elif decodedBody == "MuddyPaws":
         imNew.putpixel((10, 23), colorsDict["muddyPaws"])
         imNew.putpixel((11, 23), colorsDict["muddyPaws"])
         imNew.putpixel((13, 23), colorsDict["muddyPaws"])
         imNew.putpixel((14, 23), colorsDict["muddyPaws"])
-    elif decodedType == "PlaidShirt":
+    elif decodedBody == "PlaidShirt":
         imNew.putpixel((7, 19), colorsDict["plaidRedShade"])
         imNew.putpixel((8, 19), colorsDict["plaidBlack"])
 
@@ -95,7 +199,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 23), colorsDict["black"])
         imNew.putpixel((13, 23), colorsDict["plaidRedShade"])
         imNew.putpixel((14, 23), colorsDict["plaidBlackShade"])
-    elif decodedType == "BitcoinShirt":
+    elif decodedBody == "BitcoinShirt":
         drawShirt(im, "bitcoin")
         imNew.putpixel((7, 19), colorsDict["bitcoinLabelShade"])
         imNew.putpixel((8, 19), colorsDict["bitcoinLabel"])
@@ -116,9 +220,9 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((7, 23), colorsDict["bitcoinLabel"])
         imNew.putpixel((8, 23), colorsDict["bitcoinLabel"])
 
-    elif decodedType == "PinkShirt":
+    elif decodedBody == "PinkShirt":
         drawShirt(im, "pink")
-    elif decodedType == "RainbowShirt":
+    elif decodedBody == "RainbowShirt":
         imNew.putpixel((7, 19), colorsDict["rainbowBlueShade"])
         imNew.putpixel((8, 19), colorsDict["rainbowBlue"])
 
@@ -176,7 +280,7 @@ def drawBody(im, trait, typeEncoding):
             imNew.putpixel((1, 20), colorsDict["black"])
             imNew.putpixel((2, 20), colorsDict["rainbowPurple"])
 
-    elif decodedType == "Referee":
+    elif decodedBody == "Referee":
         drawShirt(im, "white")
         imNew.putpixel((7, 19), colorsDict["refereeStripeShade"])
 
@@ -198,7 +302,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((7, 23), colorsDict["refereeStripe"])
         imNew.putpixel((11, 23), colorsDict["refereeStripeShade"])
         imNew.putpixel((13, 23), colorsDict["refereeStripeShade"])
-    elif decodedType == "ConeOfShame":
+    elif decodedBody == "ConeOfShame":
         imNew.putpixel((2, 16), colorsDict["coneOfShameOutline"])
         imNew.putpixel((3, 16), colorsDict["coneOfShameOutline"])
         imNew.putpixel((4, 16), colorsDict["coneOfShameOutline"])
@@ -276,7 +380,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((14, 21), colorsDict["coneOfShameOutline"])
         imNew.putpixel((15, 21), colorsDict["coneOfShameOutline"])
         imNew.putpixel((16, 21), colorsDict["coneOfShameOutline"])
-    elif decodedType == "PikaTail":
+    elif decodedBody == "PikaTail":
         imNew.putpixel((2, 15), colorsDict["black"])
 
         imNew.putpixel((1, 16), colorsDict["black"])
@@ -297,14 +401,14 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((0, 19), colorsDict["pikaTail"])
         imNew.putpixel((1, 19), colorsDict["black"])
         imNew.putpixel((2, 19), colorsDict["black"])
-        imNew.putpixel((3, 19), colorsDict["solanaBand"][19])
+        imNew.putpixel((3, 19), backgroundLookup[backgroundColor])
 
         imNew.putpixel((0, 20), colorsDict["black"])
         imNew.putpixel((1, 20), colorsDict["pikaTail"])
         imNew.putpixel((2, 20), colorsDict["black"])
-        imNew.putpixel((3, 20), colorsDict["solanaBand"][20])
+        imNew.putpixel((3, 20), backgroundLookup[backgroundColor])
 
-        imNew.putpixel((0, 21), colorsDict["solanaBand"][21])
+        imNew.putpixel((0, 21), backgroundLookup[backgroundColor])
         imNew.putpixel((1, 21), colorsDict["black"])
         imNew.putpixel((2, 21), colorsDict["pikaTail"])
         imNew.putpixel((3, 21), colorsDict["black"])
@@ -315,7 +419,7 @@ def drawBody(im, trait, typeEncoding):
 
         imNew.putpixel((0, 23), colorsDict["pikaTail"])
         imNew.putpixel((1, 23), colorsDict["black"])
-    elif decodedType == "Tutu":
+    elif decodedBody == "Tutu":
         drawShirt(im, "tutu")
         imNew.putpixel((4, 20), colorsDict["tutuOutline"])
 
@@ -341,15 +445,15 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((6, 23), colorsDict["tutuOutline"])
         imNew.putpixel((7, 23), colorsDict["tutuShade"])
         imNew.putpixel((8, 23), colorsDict["tutuOutline"])
-    elif decodedType == "LimeShirt":
+    elif decodedBody == "LimeShirt":
         drawShirt(im, "lime")
-    elif decodedType == "WhiteShirt":
+    elif decodedBody == "WhiteShirt":
         drawShirt(im, "white")
-    elif decodedType == "DarkShirt":
+    elif decodedBody == "DarkShirt":
         drawShirt(im, "dark")
-    elif decodedType == "PurpleShirt":
+    elif decodedBody == "PurpleShirt":
         drawShirt(im, "purple")
-    elif decodedType == "RedAndBlue":
+    elif decodedBody == "RedAndBlue":
         drawShirt(im, "stripes2")
         imNew.putpixel((6, 20), colorsDict["stripes22Shade"])
         imNew.putpixel((7, 20), colorsDict["stripes22"])
@@ -367,7 +471,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 22), colorsDict["stripes22"])
         imNew.putpixel((13, 22), colorsDict["stripes22"])
         imNew.putpixel((14, 22), colorsDict["stripes22"])
-    elif decodedType == "Hawaiian":
+    elif decodedBody == "Hawaiian":
         imNew.putpixel((7, 19), colorsDict["hawaiianShirtPurpleShade"])
         imNew.putpixel((8, 19), colorsDict["hawaiianShirtGreen"])
 
@@ -410,7 +514,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((11, 23), colorsDict["hawaiianShirtShade"])
         imNew.putpixel((13, 23), colorsDict["hawaiianShirtRedShade"])
         imNew.putpixel((14, 23), colorsDict["hawaiianShirtShade"])
-    elif decodedType == "BathRobe":
+    elif decodedBody == "BathRobe":
         imNew.putpixel((7, 19), colorsDict["bathRobeShade"])
         imNew.putpixel((8, 19), colorsDict["bathRobeAccent"])
 
@@ -453,7 +557,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((11, 23), colorsDict["bathRobeShade"])
         imNew.putpixel((13, 23), colorsDict["bathRobeShade"])
         imNew.putpixel((14, 23), colorsDict["bathRobeShade"])
-    elif decodedType == "VelvetRobe":
+    elif decodedBody == "VelvetRobe":
         imNew.putpixel((7, 19), colorsDict["velvetRobeShade"])
         imNew.putpixel((8, 19), colorsDict["velvetRobeAccent"])
 
@@ -496,13 +600,13 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((11, 23), colorsDict["velvetRobeShade"])
         imNew.putpixel((13, 23), colorsDict["velvetRobeShade"])
         imNew.putpixel((14, 23), colorsDict["velvetRobeShade"])
-    elif decodedType == "Cope":
+    elif decodedBody == "Cope":
         drawShirt(im, "dark")
 
         imNew.putpixel((9, 22), colorsDict["white"])
         imNew.putpixel((11, 22), colorsDict["white"])
         imNew.putpixel((13, 22), colorsDict["white"])
-    elif decodedType == "StripedShirt":
+    elif decodedBody == "StripedShirt":
         drawShirt(im, "stripes")
         imNew.putpixel((6, 20), colorsDict["stripes2Shade"])
         imNew.putpixel((7, 20), colorsDict["stripes2"])
@@ -520,7 +624,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 22), colorsDict["stripes2"])
         imNew.putpixel((13, 22), colorsDict["stripes2"])
         imNew.putpixel((14, 22), colorsDict["stripes2"])
-    elif decodedType == "PolkaDots":
+    elif decodedBody == "PolkaDots":
         drawShirt(im, "yellow")
         imNew.putpixel((8, 20), colorsDict["polkaDotSpot"])
 
@@ -532,7 +636,7 @@ def drawBody(im, trait, typeEncoding):
 
         imNew.putpixel((5, 23), colorsDict["polkaDotSpot"])
         imNew.putpixel((14, 23), colorsDict["polkaDotSpot"])
-    elif decodedType == "LuckyShirt":
+    elif decodedBody == "LuckyShirt":
         drawShirt(im, "white")
         imNew.putpixel((6, 20), colorsDict["clover"])
         imNew.putpixel((8, 20), colorsDict["clover"])
@@ -552,7 +656,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((7, 23), colorsDict["cloverSecondary"])
         imNew.putpixel((8, 23), colorsDict["clover"])
         imNew.putpixel((9, 23), colorsDict["clover"])
-    elif decodedType == "AnimeShirt":
+    elif decodedBody == "AnimeShirt":
         drawShirt(im, "goku")
         imNew.putpixel((9, 20), colorsDict["gokuBlue"])
         imNew.putpixel((13, 20), colorsDict["gokuBlue"])
@@ -568,7 +672,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((11, 23), colorsDict["gokuBlue"])
         imNew.putpixel((13, 23), colorsDict["gokuBlue"])
         imNew.putpixel((14, 23), colorsDict["gokuBlue"])
-    elif decodedType == "ViceShirt":
+    elif decodedBody == "ViceShirt":
         drawShirt(im, "vice")
         imNew.putpixel((6, 20), colorsDict["viceFlower"])
         imNew.putpixel((8, 20), colorsDict["viceFlower"])
@@ -581,7 +685,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((13, 22), colorsDict["viceFlower"])
 
         imNew.putpixel((14, 23), colorsDict["viceFlower"])
-    elif decodedType == "Diaper":
+    elif decodedBody == "Diaper":
         imNew.putpixel((5, 20), colorsDict["black"])
         
         imNew.putpixel((4, 21), colorsDict["black"])
@@ -604,22 +708,22 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((7, 23), colorsDict["white"])
         imNew.putpixel((8, 23), colorsDict["white"])
         imNew.putpixel((9, 23), colorsDict["black"])
-    elif decodedType == "BlackSuit":
+    elif decodedBody == "BlackSuit":
         primaryColor = colorsDict["blackSuit"]
         primaryColorShade = colorsDict["blackSuitShade"]
         tieColor = colorsDict["blackSuitTie"]
         drawSuit(imNew, primaryColor, primaryColorShade, tieColor)
-    elif decodedType == "NavySuit":
+    elif decodedBody == "NavySuit":
         primaryColor = colorsDict["navySuit"]
         primaryColorShade = colorsDict["navySuitShade"]
         tieColor = colorsDict["navySuitTie"]
         drawSuit(imNew, primaryColor, primaryColorShade, tieColor)
-    elif decodedType == "PurpleSuit":
+    elif decodedBody == "PurpleSuit":
         primaryColor = colorsDict["purpleSuit"]
         primaryColorShade = colorsDict["purpleSuitShade"]
         tieColor = colorsDict["purpleSuitTie"]
         drawSuit(imNew, primaryColor, primaryColorShade, tieColor)
-    elif decodedType == "NyanDoge":
+    elif decodedBody == "NyanDoge":
         imNew.putpixel((0, 18), colorsDict["nyanDogeRed"])
         imNew.putpixel((1, 18), colorsDict["nyanDogeRed"])
         imNew.putpixel((2, 18), colorsDict["nyanDogeRed"])
@@ -730,7 +834,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((16, 23), colorsDict["nyanDogeFrosting"])
         imNew.putpixel((17, 23), colorsDict["nyanDogeEdge"])
         imNew.putpixel((18, 23), colorsDict["black"])
-    elif decodedType == "BlueCollar":
+    elif decodedBody == "BlueCollar":
         imNew.putpixel((7, 19), colorsDict["blueShade"])
         imNew.putpixel((8, 19), colorsDict["blue"])
 
@@ -740,7 +844,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 20), colorsDict["blue"])
         imNew.putpixel((13, 20), colorsDict["blue"])
         imNew.putpixel((14, 20), colorsDict["blue"])
-    elif decodedType == "GoldenCollar":
+    elif decodedBody == "GoldenCollar":
         # imNew.putpixel((7, 19), colorsDict["goldDogtagsShade"])
         # imNew.putpixel((8, 19), colorsDict["goldDogtags"])
 
@@ -750,7 +854,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 20), colorsDict["goldDogtagsShade"])
         # imNew.putpixel((13, 20), colorsDict["goldDogtags"])
         # imNew.putpixel((14, 20), colorsDict["goldDogtags"])
-    elif decodedType == "RastaCollar":
+    elif decodedBody == "RastaCollar":
         # imNew.putpixel((7, 19), colorsDict["bronzeDogtagsShade"])
         # imNew.putpixel((8, 19), colorsDict["bronzeDogtagsShade"])
 
@@ -760,20 +864,20 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 20), colorsDict["greenDogtags"])
         # imNew.putpixel((13, 20), colorsDict["bronzeDogtagsShade"])
         # imNew.putpixel((14, 20), colorsDict["bronzeDogtagsShade"])
-    elif decodedType == "FreedomCollar":
+    elif decodedBody == "FreedomCollar":
         imNew.putpixel((10, 20), colorsDict["redDogtags"])
         imNew.putpixel((11, 20), colorsDict["white"])
         imNew.putpixel((12, 20), colorsDict["blueDogtags"])
-    elif decodedType == "SilverCollar":
+    elif decodedBody == "SilverCollar":
         imNew.putpixel((10, 20), colorsDict["silverDogtagsShade"])
         imNew.putpixel((11, 20), colorsDict["silverDogtags"])
         imNew.putpixel((12, 20), colorsDict["silverDogtagsShade"])
-    elif decodedType == "LeatherCollar":
+    elif decodedBody == "LeatherCollar":
         imNew.putpixel((10, 20), colorsDict["bronzeDogtags"])
         imNew.putpixel((11, 20), colorsDict["silverDogtagsShade"])
         imNew.putpixel((12, 20), colorsDict["bronzeDogtags"])
 
-    elif decodedType == "RedCollar":
+    elif decodedBody == "RedCollar":
         imNew.putpixel((7, 19), colorsDict["redCollarShade"])
         imNew.putpixel((8, 19), colorsDict["redCollar"])
 
@@ -783,7 +887,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 20), colorsDict["redCollar"])
         imNew.putpixel((13, 20), colorsDict["redCollar"])
         imNew.putpixel((14, 20), colorsDict["redCollar"])
-    elif decodedType == "PinkCollar":
+    elif decodedBody == "PinkCollar":
         imNew.putpixel((7, 19), colorsDict["pinkCollarShade"])
         imNew.putpixel((8, 19), colorsDict["pinkCollar"])
 
@@ -793,7 +897,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 20), colorsDict["pinkCollar"])
         imNew.putpixel((13, 20), colorsDict["pinkCollar"])
         imNew.putpixel((14, 20), colorsDict["pinkCollar"])
-    elif decodedType == "GreenCollar":
+    elif decodedBody == "GreenCollar":
         imNew.putpixel((7, 19), colorsDict["greenCollarShade"])
         imNew.putpixel((8, 19), colorsDict["greenCollar"])
 
@@ -803,7 +907,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((12, 20), colorsDict["greenCollar"])
         imNew.putpixel((13, 20), colorsDict["greenCollar"])
         imNew.putpixel((14, 20), colorsDict["greenCollar"])
-    elif decodedType == "PurpleCollar":
+    elif decodedBody == "PurpleCollar":
         imNew.putpixel((7, 19), colorsDict["purpleCollarShade"])
         imNew.putpixel((8, 19), colorsDict["purpleCollar"])
 
@@ -814,15 +918,15 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((13, 20), colorsDict["purpleCollar"])
         imNew.putpixel((14, 20), colorsDict["purpleCollar"])
 
-    elif decodedType == "PurpleBowtie":
+    elif decodedBody == "PurpleBowtie":
         drawBowtie(imNew, "purpleBowtie", "purpleBowtieBlue")
-    elif decodedType == "GreenBowtie":
+    elif decodedBody == "GreenBowtie":
         drawBowtie(imNew, "greenBowtie", "greenBowtieShade")
-    elif decodedType == "YellowBowtie":
+    elif decodedBody == "YellowBowtie":
         drawBowtie(imNew, "yellowBowtie", "yellowBowtieShade")
-    elif decodedType == "OrangeBowtie":
+    elif decodedBody == "OrangeBowtie":
         drawBowtie(imNew, "orangeBowtie", "orangeBowtieShade")
-    elif decodedType == "EmeraldNecklace":
+    elif decodedBody == "EmeraldNecklace":
         imNew.putpixel((8, 19), colorsDict["newNecklaceShade"])
 
         imNew.putpixel((8, 20), colorsDict["newNecklace"])
@@ -838,7 +942,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((13, 21), colorsDict["newNecklace"])
 
         imNew.putpixel((11, 22), colorsDict["newEmerald"])
-    elif decodedType == "SapphireNecklace":
+    elif decodedBody == "SapphireNecklace":
         imNew.putpixel((8, 19), colorsDict["newNecklaceShade"])
 
         imNew.putpixel((8, 20), colorsDict["newNecklace"])
@@ -854,7 +958,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((13, 21), colorsDict["newNecklace"])
 
         imNew.putpixel((11, 22), colorsDict["newSapphire"])
-    elif decodedType == "RubyNecklace":
+    elif decodedBody == "RubyNecklace":
         imNew.putpixel((8, 19), colorsDict["newNecklaceShade"])
 
         imNew.putpixel((8, 20), colorsDict["newNecklace"])
@@ -870,7 +974,7 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((13, 21), colorsDict["newNecklace"])
 
         imNew.putpixel((11, 22), colorsDict["newRuby"])
-    elif decodedType == "DiamondNecklace":
+    elif decodedBody == "DiamondNecklace":
         imNew.putpixel((8, 19), colorsDict["newNecklaceShade"])
 
         imNew.putpixel((8, 20), colorsDict["newNecklace"])
@@ -886,15 +990,15 @@ def drawBody(im, trait, typeEncoding):
         imNew.putpixel((13, 21), colorsDict["newNecklace"])
 
         imNew.putpixel((11, 22), colorsDict["newDiamond"])
-    elif decodedType == "RedScarf":
+    elif decodedBody == "RedScarf":
         primaryColor = "scarfRed"
         primaryColorShade = "scarfRedShade"
         drawScarf(imNew, primaryColor, primaryColorShade)
-    elif decodedType == "GreenScarf":
+    elif decodedBody == "GreenScarf":
         primaryColor = "scarfGreen"
         primaryColorShade = "scarfGreenShade"
         drawScarf(imNew, primaryColor, primaryColorShade)
-    elif decodedType == "Cape":
+    elif decodedBody == "Cape":
         imNew.putpixel((0, 15), colorsDict["black"])
         imNew.putpixel((1, 15), colorsDict["black"])
 

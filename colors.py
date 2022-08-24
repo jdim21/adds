@@ -1,6 +1,14 @@
 colorsDict = {
     "white": (255, 255, 255),
     "black": (0, 0, 0),
+    "backgroundGreenBanner": (130, 233, 222),
+    "backgroundGreen": (181, 238, 205),
+    "backgroundYellow": (250, 235, 166),
+    "backgroundOrange": (246, 210, 174),
+    "backgroundRed": (248, 193, 186),
+    "backgroundPurple": (221, 197, 231),
+    "backgroundBlue": (183, 219, 243),
+    "backgroundWhite": (233, 234, 236),
 
     "hoodieStrings": (195, 195, 195),
 
@@ -417,6 +425,11 @@ colorsDict = {
     "typeDiamondDogeShade": (0, 217, 217),
     "typeDiamondDogeBrows": (125, 255, 255),
 
+    "typeGhost": (224, 167, 33, 128),
+    "typeGhostShade": (185, 137, 26, 128),
+    "typeGhostLight": (255, 224, 163, 128),
+    "typeGhostBrows": (255, 233, 187, 128),
+
     "redDogtags": (204, 0, 0),
     "yellowDogtags": (215, 215, 0),
     "greenDogtags": (0, 183, 0),
@@ -532,12 +545,12 @@ colorsDict = {
     "bone": (223, 223, 223),
     "boneShade": (180, 180, 180),
     "joint": (125, 63, 0),
-    "jointSmoke": (64, 64, 64),
+    "jointSmoke": (64, 64, 64, 170),
     "jointEyes": (255, 159, 159),
     "jointBurn": (255, 127, 39),
     "pipe": (125, 63, 0),
     "pipeShade": (100, 50, 0),
-    "pipeSmoke": (64,64,64),
+    "pipeSmoke": (64,64,64, 170),
     "chickenBone1": (206, 133, 78),
     "chickenBone2": (162, 89, 44),
     "chickenBone3": (109, 55, 21),
@@ -546,6 +559,7 @@ colorsDict = {
     "diamondBoneShade2": (0, 227, 227),
     "vape": (195, 195, 195),
     "vapeLight": (85, 255, 255),
+    "vapeInnerSmoke": (100, 100, 100, 170),
 
     "partyHatRed": (215, 17, 27),
     "partyHatRedShade": (191, 15, 23),
@@ -579,21 +593,27 @@ colorsDict = {
     "greenCap1": (34, 177, 76),
     "greenCap2": (27, 141, 61),
     "greenCap3": (19, 102, 44),
+    "greenCap4": (38, 199, 85),
     "orangeCap1": (255, 127, 39),
     "orangeCap2": (233, 89, 0),
     "orangeCap3": (179, 71, 0),
+    "orangeCap4": (255, 193, 97),
     "redCap1": (255, 0, 0),
     "redCap2": (235, 0, 0),
     "redCap3": (205, 0, 0),
+    "redCap4": (255, 95, 95),
     "blueCap1": (0, 162, 232),
     "blueCap2": (0, 142, 204),
     "blueCap3": (0, 130, 185),
+    "blueCap4": (0, 178, 255),
     "pinkCap1": (255, 91, 145),
     "pinkCap2": (255, 64, 126),
     "pinkCap3": (255, 15, 92),
+    "pinkCap4": (255, 128, 172),
     "purpleCap1": (179, 0, 179),
     "purpleCap2": (153, 0, 153),
     "purpleCap3": (125, 0, 125),
+    "purpleCap4": (217, 0, 217),
 
     "beerCanShade": (88,88,88),
     "beerCan": (127,127,127),
@@ -634,7 +654,7 @@ colorsDict = {
 
     "wizardPurple": (169, 0, 247),
     "wizardPurpleShade": (142, 0, 168),
-    "wizardStar": (236, 246, 255),
+    "wizardStar": (255, 242, 0),
 
     "newNecklaceShade": (183, 173, 0),
     "newNecklace": (240, 228, 0),
@@ -728,6 +748,14 @@ colorsDict = {
     "star3": (255, 242, 0),
     "star4": (255, 242, 0),
 
+    "army1": (164, 167, 81),
+    "army2": (101, 113, 59),
+    "army3": (108, 98, 47),
+    "army4": (52, 52, 30),
+    "army5": (83, 79, 44),
+    "army6": (16, 23, 52),
+    "armyGray": (105, 105, 105),
+
     "solanaBand": [
     (69, 112, 232),
     (69, 112, 232),
@@ -803,4 +831,14 @@ colorsDict = {
     # (169, 83, 234),
     # (174, 77, 237),
     # (180, 71, 239)]
+}
+
+backgroundLookup = {
+    "g": colorsDict["backgroundGreen"],
+    "r": colorsDict["backgroundRed"],
+    "b": colorsDict["backgroundBlue"],
+    "o": colorsDict["backgroundOrange"],
+    "y": colorsDict["backgroundYellow"],
+    "p": colorsDict["backgroundPurple"],
+    "w": colorsDict["backgroundWhite"],
 }

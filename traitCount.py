@@ -1,7 +1,16 @@
 traitCountDict = {
+    "background": {
+        "Green": 1000,
+        "Yellow": 800,
+        "Orange": 800,
+        "Red": 800,
+        "Purple": 800,
+        "Blue": 800,
+        "White": 0,
+    },
     "type": {
-        "Normal": 1376,
-        "Light": 1159,
+        "Normal": 1336,
+        "Light": 1151,
         "Dark": 884,
         "Brown": 780,
         "DarkBrown": 355,
@@ -12,6 +21,7 @@ traitCountDict = {
         "Skeleton": 85,
         "Devil": 15,
         "Alien": 21,
+        "Ghost": 48,
     },
     "body": {
         "SolanaHoodie": 0,
@@ -71,6 +81,7 @@ traitCountDict = {
         "RedScarf": 85,
         "GreenScarf": 85,
         "Cape": 153,
+        "Fat": 90,
     },
     "neck": {
         "GoldenCollar": 74,
@@ -85,7 +96,7 @@ traitCountDict = {
         "Booger": 0,
         "ClownNose": 102,
         "Bacon": 101,
-        "Money": 0,
+        "Money": 50,
         "FireBreath": 75,
         "Kazoo": 0,
         "Ball": 113,
@@ -153,6 +164,7 @@ traitCountDict = {
         "SantaHat": 68,
         "Sombrero": 85,
         "AnimeHair": 82,
+        "Army": 90,
     },
     "eyes":  {
         "GoldenVipers": 45,
@@ -165,8 +177,8 @@ traitCountDict = {
         "Wink": 119,
         "BigShades": 135,
         "NavyThugLyfe": 129,
-        "Neo": 46,
-        "MatrixGlasses": 93,
+        "AptosShades": 46,
+        "MagicGlasses": 93,
         "HippieGlasses": 0,
         "DiamondVipers": 3,
         "Vipers": 119,

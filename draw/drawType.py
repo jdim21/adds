@@ -1,20 +1,14 @@
 from PIL import Image
-from colors import colorsDict
+from colors import colorsDict, backgroundLookup
 from traitEncodings import TRAIT_ENCODINGS
 from draw.drawBaseType import drawBaseType
 
-def drawSolanaBackground(im):
+def drawSolanaBackground(im, backgroundColor):
     for i in range(24):
         for j in range(24):
-            im.putpixel((i, j), colorsDict["solanaBand"][j])
-    im.putpixel((3, 0), colorsDict["star1"])
-    im.putpixel((11, 1), colorsDict["star2"])
-    im.putpixel((18, 2), colorsDict["star3"])
-    im.putpixel((23, 3), colorsDict["star2"])
-    im.putpixel((2, 4), colorsDict["star2"])
-    im.putpixel((10, 4), colorsDict["star4"])
+            im.putpixel((i, j), backgroundLookup[backgroundColor])
 
-def drawType(im, trait):
+def drawType(im, trait, backgroundColor):
     imNew = Image.new('RGBA', (24, 24), (0, 0, 0, 0))
 
     decodedType = TRAIT_ENCODINGS["type"][trait]
@@ -201,51 +195,57 @@ def drawType(im, trait):
         colorLight = "typeBlackLight"
         colorBrow = "typeBlackBrows"
         drawBaseType(im, primaryColor, colorShade, colorLight, colorBrow)
+    elif decodedType == "Ghost":
+        primaryColor = "typeGhost"
+        colorShade = "typeGhostShade"
+        colorLight = "typeGhostLight"
+        colorBrow = "typeGhostBrows"
+        drawBaseType(im, primaryColor, colorShade, colorLight, colorBrow, True)
     elif decodedType == "Skeleton":
         primaryColor = "typeSkeleton"
         colorShade = "typeSkeletonShade"
         colorLight = "typeSkeletonLight"
         colorBrow = "typeSkeletonBrows"
         drawBaseType(im, primaryColor, colorShade, colorLight, colorBrow)
-        imNew.putpixel((6, 5), colorsDict["solanaBand"][5])
-        imNew.putpixel((17, 5), colorsDict["solanaBand"][5])
+        imNew.putpixel((6, 5), backgroundLookup[backgroundColor])
+        imNew.putpixel((17, 5), backgroundLookup[backgroundColor])
 
-        imNew.putpixel((5, 6), colorsDict["solanaBand"][6])
-        imNew.putpixel((6, 6), colorsDict["solanaBand"][6])
-        imNew.putpixel((7, 6), colorsDict["solanaBand"][6])
-        imNew.putpixel((16, 6), colorsDict["solanaBand"][6])
-        imNew.putpixel((17, 6), colorsDict["solanaBand"][6])
-        imNew.putpixel((18, 6), colorsDict["solanaBand"][6])
+        imNew.putpixel((5, 6), backgroundLookup[backgroundColor])
+        imNew.putpixel((6, 6), backgroundLookup[backgroundColor])
+        imNew.putpixel((7, 6), backgroundLookup[backgroundColor])
+        imNew.putpixel((16, 6), backgroundLookup[backgroundColor])
+        imNew.putpixel((17, 6), backgroundLookup[backgroundColor])
+        imNew.putpixel((18, 6), backgroundLookup[backgroundColor])
 
-        imNew.putpixel((5, 7), colorsDict["solanaBand"][7])
-        imNew.putpixel((6, 7), colorsDict["solanaBand"][7])
-        imNew.putpixel((7, 7), colorsDict["solanaBand"][7])
-        imNew.putpixel((8, 7), colorsDict["solanaBand"][7])
-        imNew.putpixel((15, 7), colorsDict["solanaBand"][7])
-        imNew.putpixel((16, 7), colorsDict["solanaBand"][7])
-        imNew.putpixel((17, 7), colorsDict["solanaBand"][7])
-        imNew.putpixel((18, 7), colorsDict["solanaBand"][7])
+        imNew.putpixel((5, 7), backgroundLookup[backgroundColor])
+        imNew.putpixel((6, 7), backgroundLookup[backgroundColor])
+        imNew.putpixel((7, 7), backgroundLookup[backgroundColor])
+        imNew.putpixel((8, 7), backgroundLookup[backgroundColor])
+        imNew.putpixel((15, 7), backgroundLookup[backgroundColor])
+        imNew.putpixel((16, 7), backgroundLookup[backgroundColor])
+        imNew.putpixel((17, 7), backgroundLookup[backgroundColor])
+        imNew.putpixel((18, 7), backgroundLookup[backgroundColor])
 
-        imNew.putpixel((5, 8), colorsDict["solanaBand"][8])
-        imNew.putpixel((6, 8), colorsDict["solanaBand"][8])
-        imNew.putpixel((7, 8), colorsDict["solanaBand"][8])
+        imNew.putpixel((5, 8), backgroundLookup[backgroundColor])
+        imNew.putpixel((6, 8), backgroundLookup[backgroundColor])
+        imNew.putpixel((7, 8), backgroundLookup[backgroundColor])
         imNew.putpixel((10, 8), colorsDict["typeSkeletonShade"])
         imNew.putpixel((11, 8), colorsDict["typeSkeletonShade"])
-        imNew.putpixel((16, 8), colorsDict["solanaBand"][8])
-        imNew.putpixel((17, 8), colorsDict["solanaBand"][8])
-        imNew.putpixel((18, 8), colorsDict["solanaBand"][8])
+        imNew.putpixel((16, 8), backgroundLookup[backgroundColor])
+        imNew.putpixel((17, 8), backgroundLookup[backgroundColor])
+        imNew.putpixel((18, 8), backgroundLookup[backgroundColor])
 
-        imNew.putpixel((5, 9), colorsDict["solanaBand"][9])
-        imNew.putpixel((6, 9), colorsDict["solanaBand"][9])
+        imNew.putpixel((5, 9), backgroundLookup[backgroundColor])
+        imNew.putpixel((6, 9), backgroundLookup[backgroundColor])
         imNew.putpixel((8, 9), colorsDict["typeSkeletonShade"])
         imNew.putpixel((9, 9), colorsDict["typeSkeletonShade"])
-        imNew.putpixel((17, 9), colorsDict["solanaBand"][9])
-        imNew.putpixel((18, 9), colorsDict["solanaBand"][9])
+        imNew.putpixel((17, 9), backgroundLookup[backgroundColor])
+        imNew.putpixel((18, 9), backgroundLookup[backgroundColor])
 
-        imNew.putpixel((5, 10), colorsDict["solanaBand"][10])
+        imNew.putpixel((5, 10), backgroundLookup[backgroundColor])
         imNew.putpixel((7, 10), colorsDict["typeSkeletonShade"])
         imNew.putpixel((11, 10), colorsDict["typeSkeletonShade"])
-        imNew.putpixel((18, 10), colorsDict["solanaBand"][10])
+        imNew.putpixel((18, 10), backgroundLookup[backgroundColor])
 
         imNew.putpixel((6, 11), colorsDict["typeSkeletonShade"])
         imNew.putpixel((10, 11), colorsDict["typeSkeletonShade"])
@@ -417,10 +417,10 @@ def drawType(im, trait):
         imNew.putpixel((17, 8), colorsDict["typeDevilHorns"])
         imNew.putpixel((18, 8), colorsDict["black"])
 
-        imNew.putpixel((5, 9), colorsDict["solanaBand"][9])
+        imNew.putpixel((5, 9), backgroundLookup[backgroundColor])
         imNew.putpixel((6, 9), colorsDict["black"])
         imNew.putpixel((17, 9), colorsDict["black"])
-        imNew.putpixel((18, 9), colorsDict["solanaBand"][9])
+        imNew.putpixel((18, 9), backgroundLookup[backgroundColor])
 
         imNew.putpixel((10, 11), colorsDict["typeDevilMarks"])
         imNew.putpixel((13, 11), colorsDict["typeDevilMarks"])

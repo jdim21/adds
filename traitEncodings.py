@@ -1,4 +1,13 @@
 TRAIT_ENCODINGS = {
+    "background": {
+        "g": "Green",
+        "o": "Orange",
+        "p": "Purple",
+        "y": "Yellow",
+        "r": "Red",
+        "b": "Blue",
+        "w": "White",
+    },
     "type": {
         "n": "Normal",
         "l": "Light",
@@ -14,6 +23,7 @@ TRAIT_ENCODINGS = {
         "i": "DiamondDoge",
         "w": "Snowy",
         "o": "Solana",
+        "g": "Ghost",
         "_": "None"
     },
     "body": {
@@ -74,6 +84,7 @@ TRAIT_ENCODINGS = {
         "2": "RedScarf",
         "3": "GreenScarf",
         "4": "Cape",
+        "5": "Fat",
         "_": "None"
     },
     "neck": {
@@ -160,6 +171,7 @@ TRAIT_ENCODINGS = {
         "U": "SantaHat",
         "V": "Sombrero",
         "W": "AnimeHair",
+        "X": "Army",
         "_": "None"
     },
     "eyes": {
@@ -173,8 +185,8 @@ TRAIT_ENCODINGS = {
         "h": "Wink",
         "i": "BigShades",
         "j": "NavyThugLyfe",
-        "k": "Neo",
-        "l": "MatrixGlasses",
+        "k": "AptosShades",
+        "l": "MagicGlasses",
         "m": "HippieGlasses",
         "n": "DiamondVipers",
         "o": "Vipers",

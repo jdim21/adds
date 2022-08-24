@@ -10,8 +10,8 @@ from draw.drawMouth import drawMouth
 from traitCount import traitCountDict
 from traitEncodings import TRAIT_ENCODINGS
 
-numTraits = 6
-traitAtIndex = ["type", "body", "neck", "mouth", "hat", "eyes"]
+numTraits = 7
+traitAtIndex = ["background", "type", "body", "neck", "mouth", "hat", "eyes"]
 hatsToDrawSecond = ["f", "W"]
 mouthsToDrawLast = ["g", "i", "a"]
 typesOfCaps = ["N", "O", "P", "Q", "R", "S"]
@@ -20,30 +20,22 @@ def main():
     traitsDict = buildTraitsDict()
     random.seed(533351)
 
-    makeNewImage(5001, "t_____")
-    # makeNewImage(5001, "ni_hr_")
-    # makeNewImage(5002, "i_____")
-    # makeNewImage(5003, "z_____")
-    # makeNewImage(5004, "a_____")
-    # makeNewImage(5005, "v_____")
-    # makeNewImage(5006, "s_____")
-    # makeNewImage(5007, "n_____")
-    # makeNewImage(5008, "l_____")
-    # makeNewImage(5009, "d_____")
-    # makeNewImage(5010, "b_____")
-    # makeNewImage(5011, "r_____")
-    # makeNewImage(5012, "k_____")
+    makeNewImage(0, "gn_____")
+    makeNewImage(0, "gv___O_")
+    makeNewImage(0, "gv___X_")
 
     dogeId = 1
     dupesRetry = 0
     timeoutsTotal = 0
     allRolls = []
-    while len(traitsDict["type"]) > 0:
+    while len(traitsDict["type"]) > 0 and len(traitsDict["background"]) > 0:
         foundRollOrTimeout = False
         while not foundRollOrTimeout:
             roll = makeTraitsRoll(traitsDict)
-            if roll not in allRolls:
-                allRolls.append(roll)
+            #ignore background trait
+            rollMinusBackground = "_" + roll[1:]
+            if rollMinusBackground not in allRolls:
+                allRolls.append(rollMinusBackground)
                 foundRollOrTimeout = True
                 makeNewImage(dogeId, roll)
                 dogeId = dogeId + 1
@@ -54,6 +46,7 @@ def main():
                 traitsDict[traitAtIndex[3]].append(roll[3])
                 traitsDict[traitAtIndex[4]].append(roll[4])
                 traitsDict[traitAtIndex[5]].append(roll[5])
+                traitsDict[traitAtIndex[6]].append(roll[6])
             if dupesRetry >= 100:
                 print("Timed out trying to de-dupe: " + roll)
                 foundRollOrTimeout = True
@@ -68,20 +61,21 @@ def makeNewImage(iter, traits):
 
     # Draw the tiny version
     im = Image.new('RGBA', (24, 24))
-    drawSolanaBackground(im)
-    drawType(im, traits[0])
+    #print("traits: " + str(traits))
+    drawSolanaBackground(im, traits[0])
+    drawType(im, traits[1], traits[0])
     #drawNeck(im, traits[2])
-    drawBody(im, traits[1], traits[0])
-    if (traits[3] not in mouthsToDrawLast):
-        drawMouth(im, traits[3], traits[0])
-    if (traits[4] in hatsToDrawSecond):
-        drawEyes(im, traits[5], traits[0])
-        drawHat(im, traits[4], traits[0])
+    drawBody(im, traits[2], traits[1], traits[0])
+    if (traits[4] not in mouthsToDrawLast):
+        drawMouth(im, traits[4], traits[1], traits[0])
+    if (traits[5] in hatsToDrawSecond):
+        drawEyes(im, traits[6], traits[1])
+        drawHat(im, traits[5], traits[1], traits[0])
     else:
-        drawHat(im, traits[4], traits[0])
-        drawEyes(im, traits[5], traits[0])
-    if (traits[3] in mouthsToDrawLast):
-        drawMouth(im, traits[3], traits[0])
+        drawHat(im, traits[5], traits[1], traits[0])
+        drawEyes(im, traits[6], traits[1])
+    if (traits[4] in mouthsToDrawLast):
+        drawMouth(im, traits[4], traits[1], traits[0])
     #smallFileName = "images/" + str(iter) + "." + l1 + l2 + l3 + ".png"
     #im.save(smallFileName, "PNG")
     
@@ -92,11 +86,12 @@ def makeNewImage(iter, traits):
     im2.save(largeFileName, "PNG")
 
 def buildTraitsDict():
-    traitsDict = { "type": [], "body": [], "neck": [], "mouth": [], "hat": [], "eyes": [] }
+    traitsDict = { "background": [], "type": [], "body": [], "neck": [], "mouth": [], "hat": [], "eyes": [] }
 
     useManualDict = False
     if useManualDict:
         traitsDict = {
+            "background": ["g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g", "g"], 
             "type": ["n", "l", "d", "b", "r", "k", "n", "v", "z", "a", "n", "n", "n", "n", "n", "n", "n"], 
             "body": ["p", "w", "l", "c", "i", "k", "o", "s", "n", "y", "r", "d", "t", "_", "_", "_", "_"], 
             "neck": ["b", "r", "g", "c", "y", "o", "e", "s", "u", "d", "f", "n", "p", "_", "_", "_", "_"], 
@@ -118,7 +113,7 @@ def buildTraitsDict():
         while len(traitsDict[key]) < len(traitsDict["type"]):
             traitsDict[key].append("_")
 
-    #print("builtDict: " + str(traitsDict))
+    # print("traitsDict[eyes].length: " + str(len(traitsDict["eyes"])))
 
     # Check that all entries are equal, else fail
     expectedLen = len(traitsDict["type"])
@@ -131,17 +126,18 @@ def buildTraitsDict():
 
 def makeTraitsRoll(traitsDict):
     traitStr = ""
-    traitList = ["type", "body", "neck", "mouth", "hat", "eyes"]
+    traitList = ["background", "type", "body", "neck", "mouth", "hat", "eyes"]
     for trait in traitList:
         roll = random.choice(traitsDict[trait])
         traitsDict[trait].remove(roll)
         traitStr = traitStr + roll
     # Hack to undo 9 out of 10 full trait rolls
+    #print("TraitStr: " + traitStr)
     if not "_" in traitStr:
-        ninetyEightPercentChance = random.randrange(100)
-        if ninetyEightPercentChance >= 98:
+        eightyPercentChance = random.randrange(100)
+        if eightyPercentChance >= 80:
             # Remove two traits
-            slots = [1, 2, 3, 4, 5]
+            slots = [1, 2, 3, 4, 5, 6]
             undoSlot1 = random.choice(slots)
             slots.remove(undoSlot1)
             traitsDict[traitList[undoSlot1]].append(traitStr[undoSlot1])
@@ -150,17 +146,26 @@ def makeTraitsRoll(traitsDict):
             slots.remove(undoSlot2)
             traitsDict[traitList[undoSlot2]].append(traitStr[undoSlot2])
             traitStr = traitStr[0:undoSlot2] + "_" + traitStr[undoSlot2+1:numTraits]
+    
+    #print("TraitStr: " + traitStr)
 
     # Devil's no floppy ear
-    if traitStr[0] == "v" and TRAIT_ENCODINGS["hat"][traitStr[4]] == "FloppyEar":
-        traitsDict["hat"].append(traitStr[4])
-        traitStr = traitStr[0:4] + "_" + traitStr[5:]
+    if traitStr[1] == "v" and TRAIT_ENCODINGS["hat"][traitStr[4]] == "FloppyEar":
+        traitsDict["hat"].append(traitStr[5])
+        traitStr = traitStr[0:5] + "_" + traitStr[6:]
+    # Skeleton no floppy ear
+    if traitStr[1] == "k" and TRAIT_ENCODINGS["hat"][traitStr[4]] == "FloppyEar":
+        traitsDict["hat"].append(traitStr[5])
+        traitStr = traitStr[0:5] + "_" + traitStr[6:]
+    # Ghosts not fat
+    if traitStr[1] == "g" and TRAIT_ENCODINGS["body"][traitStr[2]] == "Fat":
+        traitStr = traitStr[0:2] + "_" + traitStr[3:]
     # No laughing eyes with caps
-    if traitStr[5] == "g" and traitStr[4] in typesOfCaps:
-        traitStr = traitStr[0:5] + "_"
+    if traitStr[6] == "g" and traitStr[5] in typesOfCaps:
+        traitStr = traitStr[0:6] + "_"
     # No tongue out for skeletons
-    if traitStr[3] == "q" and traitStr[0] == "s":
-        traitStr = traitStr[0:3] + "_" + traitStr[4:]
+    if traitStr[4] == "q" and traitStr[1] == "s":
+        traitStr = traitStr[0:4] + "_" + traitStr[5:]
     return traitStr
 
 # Entry point

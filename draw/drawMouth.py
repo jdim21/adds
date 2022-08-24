@@ -1,10 +1,10 @@
 from PIL import Image
-from colors import colorsDict
+from colors import colorsDict, backgroundLookup
 from traitEncodings import TRAIT_ENCODINGS
 
 typesWithoutHighEyes = ["s", "z", "a"]
 
-def drawMouth(im, trait, typeEncoding):
+def drawMouth(im, trait, typeEncoding, backgroundColor):
     imNew = Image.new('RGBA', (24, 24), (0, 0, 0, 0))
 
     decodedType = TRAIT_ENCODINGS["mouth"][trait]
@@ -99,10 +99,10 @@ def drawMouth(im, trait, typeEncoding):
         imNew.putpixel((18, 19), colorsDict["baconOuter"])
         imNew.putpixel((19, 19), colorsDict["baconOuter"])
     elif decodedType == "Cigarette":
-        imNew.putpixel((22, 11), colorsDict["cigarette"])
-        imNew.putpixel((21, 12), colorsDict["cigarette"])
-        imNew.putpixel((22, 13), colorsDict["cigarette"])
-        imNew.putpixel((21, 14), colorsDict["cigarette"])
+        imNew.putpixel((22, 11), colorsDict["pipeSmoke"])
+        imNew.putpixel((21, 12), colorsDict["pipeSmoke"])
+        imNew.putpixel((22, 13), colorsDict["pipeSmoke"])
+        imNew.putpixel((21, 14), colorsDict["pipeSmoke"])
 
         imNew.putpixel((11, 16), colorsDict["cigaretteYellow"])
         imNew.putpixel((12, 16), colorsDict["cigaretteYellow"])
@@ -713,6 +713,9 @@ def drawMouth(im, trait, typeEncoding):
         imNew.putpixel((17, 20), colorsDict["black"])
 
     elif decodedType == "Pipe":
+        imNew.putpixel((20, 10), colorsDict["pipeSmoke"])
+        imNew.putpixel((21, 10), colorsDict["pipeSmoke"])
+        imNew.putpixel((22, 10), colorsDict["pipeSmoke"])
         imNew.putpixel((20, 11), colorsDict["pipeSmoke"])
         imNew.putpixel((21, 11), colorsDict["pipeSmoke"])
         imNew.putpixel((22, 11), colorsDict["pipeSmoke"])
@@ -772,11 +775,13 @@ def drawMouth(im, trait, typeEncoding):
         imNew.putpixel((22, 13), colorsDict["pipeSmoke"])
 
         imNew.putpixel((21, 14), colorsDict["pipeSmoke"])
-        imNew.putpixel((22, 14), colorsDict["solanaBand"][14])
+        # imNew.putpixel((22, 14), backgroundLookup[backgroundColor])
+        imNew.putpixel((22, 14), colorsDict["vapeInnerSmoke"])
         imNew.putpixel((23, 14), colorsDict["pipeSmoke"])
 
         imNew.putpixel((21, 15), colorsDict["pipeSmoke"])
-        imNew.putpixel((22, 15), colorsDict["solanaBand"][15])
+        # imNew.putpixel((22, 15), backgroundLookup[backgroundColor])
+        imNew.putpixel((22, 15), colorsDict["vapeInnerSmoke"])
         imNew.putpixel((23, 15), colorsDict["pipeSmoke"])
 
         imNew.putpixel((11, 16), colorsDict["black"])

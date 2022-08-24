@@ -180,7 +180,7 @@ def drawEyes(im, trait, type):
         imNew.putpixel((9, 14), colorsDict["hippieGlassesOutline"])
         imNew.putpixel((14, 14), colorsDict["hippieGlassesOutline"])
         imNew.putpixel((15, 14), colorsDict["hippieGlassesOutline"])
-    elif decodedType == "MatrixGlasses":
+    elif decodedType == "MagicGlasses":
 
         imNew.putpixel((8, 11), colorsDict["matrixGlasses"])
         imNew.putpixel((9, 11), colorsDict["matrixGlassesShine"])
@@ -251,7 +251,7 @@ def drawEyes(im, trait, type):
         imNew.putpixel((14, 13), colorsDict["diamondVipers3"])
         imNew.putpixel((15, 13), colorsDict["diamondVipers4"])
         imNew.putpixel((16, 13), colorsDict["diamondVipers5"])
-    elif decodedType == "Neo":
+    elif decodedType == "AptosShades":
 
         imNew.putpixel((8, 10), colorsDict["black"])
         imNew.putpixel((9, 10), colorsDict["black"])
