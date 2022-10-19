@@ -12,17 +12,16 @@ from traitEncodings import TRAIT_ENCODINGS
 
 numTraits = 7
 traitAtIndex = ["background", "type", "body", "neck", "mouth", "hat", "eyes"]
-hatsToDrawSecond = ["f", "W"]
+hatsToDrawSecond = ["f", "W", "a"]
 mouthsToDrawLast = ["g", "i", "a"]
 typesOfCaps = ["N", "O", "P", "Q", "R", "S"]
 
 def main():
     traitsDict = buildTraitsDict()
-    random.seed(533351)
+    random.seed(53333)
 
     makeNewImage(0, "gn_____")
-    makeNewImage(0, "gv___O_")
-    makeNewImage(0, "gv___X_")
+    makeNewImage(0, "blY___k")
 
     dogeId = 1
     dupesRetry = 0
@@ -137,7 +136,7 @@ def makeTraitsRoll(traitsDict):
         eightyPercentChance = random.randrange(100)
         if eightyPercentChance >= 80:
             # Remove two traits
-            slots = [1, 2, 3, 4, 5, 6]
+            slots = [2, 3, 4, 5, 6]
             undoSlot1 = random.choice(slots)
             slots.remove(undoSlot1)
             traitsDict[traitList[undoSlot1]].append(traitStr[undoSlot1])
@@ -150,16 +149,29 @@ def makeTraitsRoll(traitsDict):
     #print("TraitStr: " + traitStr)
 
     # Devil's no floppy ear
-    if traitStr[1] == "v" and TRAIT_ENCODINGS["hat"][traitStr[4]] == "FloppyEar":
+    if traitStr[1] == "v" and TRAIT_ENCODINGS["hat"][traitStr[5]] == "FloppyEar":
         traitsDict["hat"].append(traitStr[5])
         traitStr = traitStr[0:5] + "_" + traitStr[6:]
     # Skeleton no floppy ear
-    if traitStr[1] == "k" and TRAIT_ENCODINGS["hat"][traitStr[4]] == "FloppyEar":
+    if traitStr[1] == "s" and TRAIT_ENCODINGS["hat"][traitStr[5]] == "FloppyEar":
+        traitsDict["hat"].append(traitStr[5])
+        traitStr = traitStr[0:5] + "_" + traitStr[6:]
+    # Ghosts no floppy ear
+    if traitStr[1] == "g" and TRAIT_ENCODINGS["hat"][traitStr[5]] == "FloppyEar":
         traitsDict["hat"].append(traitStr[5])
         traitStr = traitStr[0:5] + "_" + traitStr[6:]
     # Ghosts not fat
     if traitStr[1] == "g" and TRAIT_ENCODINGS["body"][traitStr[2]] == "Fat":
         traitStr = traitStr[0:2] + "_" + traitStr[3:]
+    # Ghosts no rainbow shirt
+    if traitStr[1] == "g" and TRAIT_ENCODINGS["body"][traitStr[2]] == "RainbowShirt":
+        traitStr = traitStr[0:2] + "_" + traitStr[3:]
+    # Ghosts no wink
+    if traitStr[1] == "g" and TRAIT_ENCODINGS["eyes"][traitStr[6]] == "Wink":
+        traitStr = traitStr[0:6] + "_"
+    # Ghosts no happy eyes
+    if traitStr[1] == "g" and TRAIT_ENCODINGS["eyes"][traitStr[6]] == "Happy":
+        traitStr = traitStr[0:6] + "_"
     # No laughing eyes with caps
     if traitStr[6] == "g" and traitStr[5] in typesOfCaps:
         traitStr = traitStr[0:6] + "_"

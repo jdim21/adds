@@ -11,7 +11,7 @@ ls images/*.??_____.* | wc | awk '{print $1}'
 ls images/*.??_____.*
 
 echo "DiamondNecklaces: "
-ls images/*.?1*
+ls images/*.??1*
 
 echo "DiamondVipers: "
 ls images/*.??????n.*

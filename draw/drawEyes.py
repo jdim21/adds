@@ -126,10 +126,10 @@ def drawEyes(im, trait, type):
         imNew.putpixel((14, 13), colorsDict["bigShades3"])
         imNew.putpixel((15, 13), colorsDict["bigShades3"])
     elif decodedType == "Wink":
-        imNew.putpixel((14, 12), colorsDict[typePrimaryColor])
-        imNew.putpixel((15, 12), colorsDict[typePrimaryColor])
-        imNew.putpixel((14, 13), colorsDict["black"])
-        imNew.putpixel((15, 13), colorsDict["black"])
+        imNew.putpixel((8, 12), colorsDict[typePrimaryColor])
+        imNew.putpixel((9, 12), colorsDict[typePrimaryColor])
+        imNew.putpixel((8, 13), colorsDict["black"])
+        imNew.putpixel((9, 13), colorsDict["black"])
     elif decodedType == "Laughing":
         imNew.putpixel((9, 11), colorsDict["black"])
         imNew.putpixel((14, 11), colorsDict["black"])

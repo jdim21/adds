@@ -47,7 +47,7 @@ TRAIT_ENCODINGS = {
         "r": "ConeOfShame",
         "s": "BitcoinShirt",
         "t": "MuddyPaws",
-        "u": "PlaidShirt",
+        "u": "CheckeredShirt",
         "v": "RedAndBlue",
         "w": "Cope",
         "x": "VelvetRobe",

@@ -46,6 +46,7 @@ def drawSuit(im, primaryColor, primaryColorShade, tieColor):
     imNew.putpixel((12, 22), colorsDict["white"])
     imNew.putpixel((13, 22), primaryColor)
     imNew.putpixel((14, 22), primaryColor)
+    imNew.putpixel((15, 22), colorsDict["black"])
  
     imNew.putpixel((2, 23), colorsDict["black"])
     imNew.putpixel((3, 23), primaryColorShade)

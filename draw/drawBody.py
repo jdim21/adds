@@ -154,7 +154,7 @@ def drawBody(im, trait, typeEncoding, backgroundColor):
         imNew.putpixel((11, 23), colorsDict["muddyPaws"])
         imNew.putpixel((13, 23), colorsDict["muddyPaws"])
         imNew.putpixel((14, 23), colorsDict["muddyPaws"])
-    elif decodedBody == "PlaidShirt":
+    elif decodedBody == "CheckeredShirt":
         imNew.putpixel((7, 19), colorsDict["plaidRedShade"])
         imNew.putpixel((8, 19), colorsDict["plaidBlack"])
 
@@ -558,16 +558,20 @@ def drawBody(im, trait, typeEncoding, backgroundColor):
         imNew.putpixel((13, 23), colorsDict["bathRobeShade"])
         imNew.putpixel((14, 23), colorsDict["bathRobeShade"])
     elif decodedBody == "VelvetRobe":
+        imNew.putpixel((6, 19), colorsDict["black"])
         imNew.putpixel((7, 19), colorsDict["velvetRobeShade"])
         imNew.putpixel((8, 19), colorsDict["velvetRobeAccent"])
 
+        imNew.putpixel((5, 20), colorsDict["black"])
         imNew.putpixel((6, 20), colorsDict["velvetRobeShade"])
         imNew.putpixel((7, 20), colorsDict["velvetRobe"])
         imNew.putpixel((8, 20), colorsDict["velvetRobe"])
         imNew.putpixel((9, 20), colorsDict["velvetRobeAccent"])
         imNew.putpixel((13, 20), colorsDict["velvetRobeAccent"])
         imNew.putpixel((14, 20), colorsDict["velvetRobeAccent"])
+        imNew.putpixel((15, 20), colorsDict["black"])
 
+        imNew.putpixel((4, 21), colorsDict["black"])
         imNew.putpixel((5, 21), colorsDict["velvetRobeBeltShade"])
         imNew.putpixel((6, 21), colorsDict["velvetRobe"])
         imNew.putpixel((7, 21), colorsDict["velvetRobe"])
@@ -577,7 +581,9 @@ def drawBody(im, trait, typeEncoding, backgroundColor):
         imNew.putpixel((12, 21), colorsDict["velvetRobeAccent"])
         imNew.putpixel((13, 21), colorsDict["velvetRobe"])
         imNew.putpixel((14, 21), colorsDict["velvetRobe"])
+        imNew.putpixel((15, 21), colorsDict["black"])
 
+        imNew.putpixel((3, 22), colorsDict["black"])
         imNew.putpixel((4, 22), colorsDict["velvetRobeShade"])
         imNew.putpixel((5, 22), colorsDict["velvetRobe"])
         imNew.putpixel((6, 22), colorsDict["velvetRobeBelt"])
@@ -589,17 +595,22 @@ def drawBody(im, trait, typeEncoding, backgroundColor):
         imNew.putpixel((12, 22), colorsDict["velvetRobe"])
         imNew.putpixel((13, 22), colorsDict["velvetRobe"])
         imNew.putpixel((14, 22), colorsDict["velvetRobe"])
+        imNew.putpixel((15, 22), colorsDict["black"])
 
+        imNew.putpixel((2, 23), colorsDict["black"])
         imNew.putpixel((3, 23), colorsDict["velvetRobeShade"])
         imNew.putpixel((4, 23), colorsDict["velvetRobe"])
         imNew.putpixel((5, 23), colorsDict["velvetRobe"])
         imNew.putpixel((6, 23), colorsDict["velvetRobe"])
         imNew.putpixel((7, 23), colorsDict["velvetRobeBelt"])
         imNew.putpixel((8, 23), colorsDict["velvetRobe"])
+        imNew.putpixel((9, 23), colorsDict["black"])
         imNew.putpixel((10, 23), colorsDict["velvetRobeShade"])
         imNew.putpixel((11, 23), colorsDict["velvetRobeShade"])
+        imNew.putpixel((12, 23), colorsDict["black"])
         imNew.putpixel((13, 23), colorsDict["velvetRobeShade"])
         imNew.putpixel((14, 23), colorsDict["velvetRobeShade"])
+        imNew.putpixel((15, 23), colorsDict["black"])
     elif decodedBody == "Cope":
         drawShirt(im, "dark")
 

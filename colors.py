@@ -709,8 +709,8 @@ colorsDict = {
 
     "headphonesStrap": (127, 127, 127),
     "headphonesStrapShade": (103, 103, 103),
-    "headphonesEar": (255, 242, 0),
-    "headphonesEarShade": (198, 188, 0),
+    "headphonesEar": (12, 184, 224),
+    "headphonesEarShade": (9, 142, 173),
     
     "cyclopsYellow": (255, 242, 0),
     "cyclopsYellowShade": (204, 193, 0),
